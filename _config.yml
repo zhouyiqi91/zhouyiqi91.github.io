@@ -8,13 +8,12 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : "Heng Li's blog"
+title : "Yiqi's blog"
 tagline: It is too technical...
 author :
-  name : Heng Li
-  email : lh3@me.com
-  github : lh3
-  twitter : lh3lh3
+  name : Yiqi
+  email : 
+  github : zhouyiqi91
 
 markdown: kramdown
 
@@ -26,7 +25,7 @@ markdown: kramdown
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://lh3.github.io
+production_url : http://zhouyiqi91.github.io
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
