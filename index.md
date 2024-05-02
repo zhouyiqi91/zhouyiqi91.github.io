@@ -4,10 +4,6 @@ title: Homepage
 ---
 {% include JB/setup %}
 
-### Links
-This is a folk of Li Heng's blog now.
-[GitHub][github]
-
 ### Posts [![](images/feed-icon-14x14.png)](rss.xml)
 
 <ul class="posts">
@@ -16,6 +12,10 @@ This is a folk of Li Heng's blog now.
   {% endfor %}
 </ul>
 
+### Links
+[GitHub][github]
 
-[github]: https://github.com/zhouyiqi91
+[github]: https://github.com/zhouyiqi91/zhouyiqi91.github.io
+
+{% include comments.html %}
 
