@@ -23,8 +23,15 @@ bcftools call -mv -Ov -o .//BL22680_FJ/07.variant_calling/BL22680_FJ_raw.vcf .//
 bcftools norm -m- -f /SGRNJ06/randd/public/genome/rna/celescope_v2/hs/Homo_sapiens.GRCh38.dna.primary_assembly.fa .//BL22680_FJ/07.variant_calling/BL22680_FJ_raw.vcf | bcftools norm -d both -o .//BL22680_FJ/07.variant_calling/BL22680_FJ_norm.vcf
 ```
 但是将BAM downsample到1/20却可以检出。
+将`--max-depth,-d` 减小到2000000 可以在一个样本中检出。
 
-- https://samtools.github.io/bcftools/bcftools.html#mpileup
+## bcftools
+- <https://samtools.github.io/bcftools/bcftools.html#mpileup>
 - [bcftools call ignores deletion with high coverage](https://github.com/samtools/bcftools/issues/1459)
 - [samtools mpileup gives inconsistent results with different depth limits](https://github.com/samtools/samtools/issues/619)
 - [bcftools norm](https://github.com/samtools/bcftools/issues/1114)
+- [bcftools ignores indel even when using --min-ireads 10](https://github.com/samtools/bcftools/issues/1809)
+
+
+## GATK
+[HaplotypeCaller: data generated from amplicon sequencing ](https://gatk.broadinstitute.org/hc/en-us/community/posts/360057582511-HaplotypeCaller-data-generated-from-amplicon-sequencing)
