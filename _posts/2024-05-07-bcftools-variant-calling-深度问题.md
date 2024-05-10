@@ -24,10 +24,13 @@ bcftools norm -m- -f /SGRNJ06/randd/public/genome/rna/celescope_v2/hs/Homo_sapie
 ```
 但是将BAM downsample到1/20却可以检出。
 将`--max-depth,-d` 减小到2000000 可以在一个样本中检出。
+使用`--max-depth 2000000 --max-idepth 1000000 --no-BAQ` 都可以检出。
+
+类似问题
+- [bcftools call ignores deletion with high coverage](https://github.com/samtools/bcftools/issues/1459)
 
 ## bcftools
 - <https://samtools.github.io/bcftools/bcftools.html#mpileup>
-- [bcftools call ignores deletion with high coverage](https://github.com/samtools/bcftools/issues/1459)
 - [samtools mpileup gives inconsistent results with different depth limits](https://github.com/samtools/samtools/issues/619)
 - [bcftools norm](https://github.com/samtools/bcftools/issues/1114)
 - [bcftools ignores indel even when using --min-ireads 10](https://github.com/samtools/bcftools/issues/1809)
