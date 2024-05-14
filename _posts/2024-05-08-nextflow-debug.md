@@ -51,3 +51,10 @@ Command error:
 ```
 
 解决：使用0.7.17--he4a0461_11
+
+
+## docker: failed to register layer: lsetxattr user.overlay.impure /etc: operation not supported.
+
+在pull quay.io/singleron-rd/multiqc_sgr:1.21.3时报错。docker 26.0.1升级到26.1.2无法解决。
+
+[https://github.com/MultiQC/MultiQC/issues/2283](Pulling latest version of MultiQC image on GitPod fails)
