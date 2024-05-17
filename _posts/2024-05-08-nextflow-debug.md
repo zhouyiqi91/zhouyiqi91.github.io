@@ -4,7 +4,7 @@ mathjax: true
 title: "nextflow使用中的问题记录"
 description: ""
 category: "生信"
-tags: ["nextflow"]
+tags: ["nextflow","debug"]
 ---
 {% include JB/setup %}
 
@@ -58,3 +58,13 @@ Command error:
 在pull quay.io/singleron-rd/multiqc_sgr:1.21.3时报错。docker 26.0.1升级到26.1.2无法解决。
 
 [https://github.com/MultiQC/MultiQC/issues/2283](Pulling latest version of MultiQC image on GitPod fails)
+
+##  .command.sh: line 3: multiqc: command not found
+
+解决：conda环境没有正确安装。移除错误的conda环境。
+
+## `there may be a syntax error in the body`
+
+<https://training.nextflow.io/troubleshoot/04_exercise/>
+
+可能原因：少加双引号，逗号
