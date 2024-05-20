@@ -68,3 +68,18 @@ Command error:
 <https://training.nextflow.io/troubleshoot/04_exercise/>
 
 可能原因：少加双引号，逗号
+
+## 跳过某个process，例如freebayes
+
+有一个input channel为空，例如
+```
+    FREEBAYES (
+        ch_bam,
+        [ [], params.fasta ], 
+        SAMTOOLS_FAIDX.out.fai,
+        ch_bam.map { it -> [[id:'fake'],[]] },
+        ch_bam.map { it -> [[id:'fake'],[]] },
+        ch_bam.map { it -> [[id:'fake'],[]] },
+    )
+```
+如果把第二个参数换成`SAMTOOLS_FAIDX.out.fa`,由于`SAMTOOLS_FAIDX.out.fa`是optional output，为空，所以会跳过FREEBAYES

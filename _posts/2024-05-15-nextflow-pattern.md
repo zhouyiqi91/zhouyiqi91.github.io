@@ -46,3 +46,15 @@ ERROR ~ Invalid method invocation `call` with arguments: [[id:sampleX], /SGRNJ06
 - `schema_input.json`
 - 包含`fromSamplesheet`的文件
 - 包含`validateInputSamplesheet`的文件
+
+## optional input value
+```
+FILTER_BAM (
+    ch_filter_bam,
+    { params.genes ? params.genes : "" },
+    { params.panel ? params.panel : "" },
+)
+
+def genes_args = genes ? "--genes $genes": ""
+def panel_args = panel ? "--panel $panel": ""
+```

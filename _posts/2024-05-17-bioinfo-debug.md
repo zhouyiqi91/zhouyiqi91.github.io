@@ -1,7 +1,6 @@
 ---
 layout: post
 mathjax: true
-title: ""
 description: ""
 category: "生信"
 tags: ["debug"]
