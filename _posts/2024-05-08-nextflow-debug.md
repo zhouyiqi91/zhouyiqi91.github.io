@@ -67,7 +67,15 @@ Command error:
 
 <https://training.nextflow.io/troubleshoot/04_exercise/>
 
-可能原因：少加双引号，逗号
+可能原因：少加双引号，逗号,括号
+
+path没有加括号
+```
+- cause: Unexpected input: '{' @ line 146, column 18.
+   process STARSOLO {
+
+tuple val(meta), path "*.Solo.out/GeneFull_Ex50pAS/Summary.csv" , emit: summary
+```
 
 ## 跳过某个process，例如freebayes
 

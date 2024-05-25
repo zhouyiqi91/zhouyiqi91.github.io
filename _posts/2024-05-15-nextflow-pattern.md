@@ -58,3 +58,8 @@ FILTER_BAM (
 def genes_args = genes ? "--genes $genes": ""
 def panel_args = panel ? "--panel $panel": ""
 ```
+
+## multi-tool container / mulled
+<https://github.com/BioContainers/multi-package-containers?tab=readme-ov-file>
+
+
