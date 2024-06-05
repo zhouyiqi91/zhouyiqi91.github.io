@@ -62,4 +62,6 @@ def panel_args = panel ? "--panel $panel": ""
 ## multi-tool container / mulled
 <https://github.com/BioContainers/multi-package-containers?tab=readme-ov-file>
 
+## schema builder
+<https://nf-co.re/pipeline_schema_builder>
 
