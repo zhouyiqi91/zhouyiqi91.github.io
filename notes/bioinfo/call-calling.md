@@ -1,0 +1,3 @@
+BD也有两个cell-calling算法: basic和refine
+basic 类似于knee filtering，refine类似于emptydrops_CR；
+这篇比较的文章用的BD的分析版本是2.0，刚好把default的算法从refine改成了basic
