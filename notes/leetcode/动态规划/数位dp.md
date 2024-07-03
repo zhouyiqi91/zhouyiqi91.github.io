@@ -30,7 +30,9 @@ limitLow：表示是否受到下界约束，若约束了，最小需要填start[
                 res += dp(i + 1, low_limit and x==low, high_limit and x == high)
             return res % MOD
 
-        return dp(0, True, True, 0)
+        ans = dp(0, True, True)
+        dp.cache_clear()
+        return ans
 ```
 
 什么时候需要考虑前导0？当前导0会影响后续选择数字
