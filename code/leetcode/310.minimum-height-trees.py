@@ -86,28 +86,29 @@ class Solution:
         for x,y in edges:
             g[x].append(y)
             g[y].append(x)
-        def dfs(x, fa):
-            cur = [0,0]
+
+        def dfs1(x, fa):
+            cur = [-1,-1]
             for y in g[x]:
                 if y != fa:
-                    cur.append(dfs(y,x))
+                    cur.append(dfs1(y,x))
             cur.sort(reverse=True)
             mh[x] = cur[:2]
             return cur[0] + 1
-        
         h_node = defaultdict(list)
-        h = dfs(0,-1)
+        h = dfs1(0,-1)
         h_node[h].append(0)
-        def reroot(x,fa):
+
+        def dfs2(x,fa):
             for y in g[x]:
                 if y != fa:
                     up = mh[x][0] if mh[y][0]+1 != mh[x][0] else mh[x][1]
                     up += 1
                     down = mh[y][0]
-                    cur = max(up, down)
-                    h_node[cur].append(y)
-                    dfs(y,x)
-        reroot(0,-1)
+                    h_node[max(up, down)+1].append(y)
+                    mh[y] = sorted(mh[y] + [up], reverse=True)[:2]
+                    dfs2(y,x)
+        dfs2(0,-1)
         return h_node[min(h_node)]
 
 
