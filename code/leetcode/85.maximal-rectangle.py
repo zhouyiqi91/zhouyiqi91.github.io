@@ -91,6 +91,9 @@ class Solution:
                     ans = max(ans, row_len * (x-nx+1))
                     nx -= 1
         return ans
+    
+
+# TODO 单调栈优化
 
 
 # @lc code=end
