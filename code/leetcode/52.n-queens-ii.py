@@ -71,7 +71,29 @@ from typing import *
 # @lc code=start
 class Solution:
     def totalNQueens(self, n: int) -> int:
-        
+        cols = [False] * n
+        dig1 = defaultdict(int)
+        dig2 = defaultdict(int)
+        self.ans = 0
+        def dfs(row):
+            if row==n:
+                self.ans += 1
+                return
+            for col in range(n):
+                if not cols[col]:
+                    d1 = col - row
+                    d2 = col + row
+                    if not dig1[d1] and not dig2[d2]:
+                        cols[col] = True
+                        dig1[d1] = 1
+                        dig2[d2] = 1
+                        dfs(row+1)
+                        cols[col] = False
+                        dig1[d1] = 0
+                        dig2[d2] = 0
+        dfs(0)
+        return self.ans
+
 
 # @lc code=end
 
