@@ -95,7 +95,21 @@ from typing import *
 # @lc code=start
 class Solution:
     def isScramble(self, s1: str, s2: str) -> bool:
+        if Counter(s1) != Counter(s2): return False
+        @cache
+        def dp(l1,l2,length):
+            if s1[l1:l1+length] == s2[l2:l2+length]: return True
+            if length==1: return s1[l1] == s2[l2]
+            for len1 in range(1,length):
+                len2 = length - len1
+                if dp(l1,l2,len1) and dp(l1+len1,l2+len1, len2): return True
+                if dp(l1, l2+len2, len1) and dp(l1+len1,l2,len2):
+                    return True
+            return False
         
+        ans = dp(0,0,len(s1))
+        dp.cache_clear()
+        return ans
 # @lc code=end
 
 
