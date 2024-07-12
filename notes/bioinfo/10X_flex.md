@@ -1,6 +1,7 @@
 # Chromium Single Cell Gene Expression Flex
 
 R1 28bp: 16bp cell barcode + 12bp UMI
+
 R2 90bp: ligated probe insert sequence, constant sequence,
 and the 8 bp Probe Barcode that identifies the probe set used to hybridize the sample
 
