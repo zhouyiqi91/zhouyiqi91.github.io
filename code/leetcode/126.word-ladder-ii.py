@@ -92,6 +92,65 @@ from typing import *
 # @lc code=start
 class Solution:
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
+        if endWord not in set(wordList): return False
+        g = defaultdict(list)
+        def isconnected(x,y):
+            res = 0
+            for c1,c2 in zip(x,y):
+                if c1 != c2:
+                    res += 1
+                    if res > 1:
+                        return False
+            return True
+        n = len(wordList)
+        for i in range(n):
+            for j in range(i+1,n):
+                ci,cj = wordList[i], wordList[j]
+                if isconnected(ci,cj):
+                    g[ci].append(cj)
+                    g[cj].append(ci)
+        
+        pre = defaultdict(list)
+        q = [beginWord]
+        found = False
+        vis = defaultdict(int)
+        while q:
+            if found: break
+            se = set() #存储新加入的节点
+            for x in q:
+                for y in g[x]:
+                    if not vis[y]:
+                        pre[y].append(x)
+                        vis[y] = True
+                        se.add(y)
+                    if y in se:
+                        pre[y].append(x)
+                    if y == endWord:
+                        found = True
+            q = list(se)
+        if not found: return []
+        path = []
+        ans = []
+        def dfs(x):
+            path.append(x)
+            if not pre[x]:
+                ans.append(path[::-1])
+            for y in pre[x]:
+                dfs(y)
+            path.pop()
+                    
+        dfs(endWord)
+        return ans
+
+
+
+
+                
+
+
+
+        
+        
 # @lc code=end
 
 
