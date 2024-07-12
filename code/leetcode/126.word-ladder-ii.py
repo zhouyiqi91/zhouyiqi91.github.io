@@ -92,7 +92,7 @@ from typing import *
 # @lc code=start
 class Solution:
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
-        if endWord not in set(wordList): return False
+        if endWord not in set(wordList): return []
         g = defaultdict(list)
         def isconnected(x,y):
             res = 0
@@ -102,6 +102,8 @@ class Solution:
                     if res > 1:
                         return False
             return True
+
+        wordList.append(beginWord)
         n = len(wordList)
         for i in range(n):
             for j in range(i+1,n):
@@ -110,24 +112,26 @@ class Solution:
                     g[ci].append(cj)
                     g[cj].append(ci)
         
-        pre = defaultdict(list)
+        pre = defaultdict(set)
         q = [beginWord]
         found = False
         vis = defaultdict(int)
+        vis[beginWord] = True
         while q:
             if found: break
             se = set() #存储新加入的节点
             for x in q:
                 for y in g[x]:
                     if not vis[y]:
-                        pre[y].append(x)
+                        pre[y].add(x)
                         vis[y] = True
                         se.add(y)
                     if y in se:
-                        pre[y].append(x)
+                        pre[y].add(x)
                     if y == endWord:
                         found = True
             q = list(se)
+
         if not found: return []
         path = []
         ans = []
@@ -141,16 +145,7 @@ class Solution:
                     
         dfs(endWord)
         return ans
-
-
-
-
-                
-
-
-
-        
-        
+ 
 # @lc code=end
 
 
