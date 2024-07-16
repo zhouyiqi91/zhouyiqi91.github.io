@@ -92,8 +92,12 @@ from typing import *
 # @lc code=start
 class Solution:
     def findLadders(self, beginWord: str, endWord: str, wordList: List[str]) -> List[List[str]]:
-        if endWord not in set(wordList): return []
-        g = defaultdict(list)
+        se = set(wordList)
+        if endWord not in se: return []
+        # 因为beginword可能在wordlist中,所以可能会有重复
+        if beginWord not in set(wordList):
+            wordList.append(beginWord)
+
         def isconnected(x,y):
             res = 0
             for c1,c2 in zip(x,y):
@@ -103,7 +107,7 @@ class Solution:
                         return False
             return True
 
-        wordList.append(beginWord)
+        g = defaultdict(list)
         n = len(wordList)
         for i in range(n):
             for j in range(i+1,n):
@@ -112,36 +116,36 @@ class Solution:
                     g[ci].append(cj)
                     g[cj].append(ci)
         
-        pre = defaultdict(set)
-        q = [beginWord]
+        pre = defaultdict(list)
+        q = {beginWord}
         found = False
         vis = defaultdict(int)
         vis[beginWord] = True
         while q:
-            if found: break
-            se = set() #存储新加入的节点
+            nxt = set() #存储新加入的节点
             for x in q:
                 for y in g[x]:
                     if not vis[y]:
-                        pre[y].add(x)
+                        pre[y].append(x)
                         vis[y] = True
-                        se.add(y)
-                    if y in se:
-                        pre[y].add(x)
-                    if y == endWord:
-                        found = True
-            q = list(se)
+                        nxt.add(y)
+                        if y == endWord:
+                            found = True
+                    elif y in nxt:
+                        pre[y].append(x)
+            if found: break
+            q = nxt
 
-        if not found: return []
-        path = []
+        path = [endWord]
         ans = []
         def dfs(x):
-            path.append(x)
-            if not pre[x]:
+            if x==beginWord:
                 ans.append(path[::-1])
+                return
             for y in pre[x]:
+                path.append(y)
                 dfs(y)
-            path.pop()
+                path.pop()
                     
         dfs(endWord)
         return ans
