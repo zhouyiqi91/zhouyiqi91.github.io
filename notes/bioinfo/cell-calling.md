@@ -29,4 +29,4 @@ The Genentech preprint uses [v2.0 BD Rhapsody™ Sequence Analysis Pipeline](htt
 
 ![](../../images/20240719150929.png)
 
-Samples without a sharp knee are more ”unstabler“ because the absence of a sharp knee indicates a higher background, making it easier for the EmptyDrops algorithm to mistakenly identify the background as real cells.
+Samples without a sharp knee are ”unstabler“ because the absence of a sharp knee indicates a higher background, making it easier for the EmptyDrops algorithm to mistakenly identify the background as real cells.
