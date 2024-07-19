@@ -2,7 +2,9 @@
 
 CeleScope(like CellRanger and Starsolo) implements two [Cell filtering (calling) algorithms](https://github.com/alexdobin/STAR/blob/master/docs/STARsolo.md#cell-filtering-calling): knee filtering and EmptyDrop-like filtering. The default cell-calling method of CeleScope is EmptyDrop-like filtering(EmptyDrops_CR).
 
-Knee filtering is a "stable" cell-calling algorithm: the number of cells will not increase with the increase of sequencing depth, because knee filtering only considers UMI counts. In contrast, EmptyDrop-like is not that "stable" because only cells above umiMin (default 500) are taken into consideration; as the sequencing depth increases, more and more cells will be taken into consideration. A more detailed description of the two algorithms can be found in the following links.
+Knee filtering is a "stable" cell-calling algorithm: the number of cells will not increase with the increase of sequencing depth, because knee filtering considers UMI counts exceed a **dynamic threshold** m/10, where m is the 99th percentile of top N barcodes based on total UMI counts. 
+
+In contrast, EmptyDrop-like is not that "stable". One reason is that in the second step, only cells above a **hard threshold** `umiMin` (default 500) are taken into consideration; as the sequencing depth increases, more and more cells will be taken into consideration. A more detailed description of the two algorithms can be found in the following links.
 
 [Cellranger EmptyDrops](https://www.10xgenomics.com/support/software/cell-ranger/latest/algorithms-overview/cr-gex-algorithm)
 
