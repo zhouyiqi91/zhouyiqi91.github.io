@@ -113,33 +113,28 @@ from builtins import *
 from typing import *
 # @lcpr-template-end
 # @lc code=start
+
+# 容易写错：deepcopy二维矩阵方法；
 class Solution:
     def numberOfSets(self, n: int, maxDistance: int, roads: List[List[int]]) -> int:
+        def powerset(n: int):
+            for s in range(1<<n):
+                yield [mask for mask in range(n) if (1<<mask) & s]
+
+        g0 = [[inf] * n for _ in range(n)]
+        for x,y,w in roads:
+            g0[x][y] = min(g0[x][y], w)
+            g0[y][x] = min(g0[y][x], w)
+            
         ans = 0
-        for mask in range(1<<n):
-            op = set()
-            for i in range(n):
-                if not (1 << i) & mask:
-                    op.add(i)
-            g = [[inf]*n for _ in range(n)]
-            for x,y,d in roads:
-                if x in op and y in op:
-                    g[x][y] = d
-                    g[y][x] = d
-            for k in op:
-                for i in op:
-                    for j in op:
+        for s in powerset(n):
+            g = [row.copy() for row in g0]
+            for k in s:
+                for i in s:
+                    for j in s:
                         if (d:=g[i][k] + g[k][j]) < g[i][j]:
                             g[i][j] = d
-            
-            valid = True
-            for i in op:
-                for j in op:
-                    if i != j and g[i][j] > maxDistance:
-                        valid = False
-                        break
-            ans += valid
-
+            ans += all(g[i][j] <= maxDistance for i in s for j in s if i != j) # i==j时距离为默认值inf
         return ans
 
 

@@ -9,6 +9,8 @@
 
 https://leetcode.cn/problems/numbers-with-repeated-digits/solutions/1748539/by-endlesscheng-c5vg/
 
+定义 dfs(i,limitLow,limitHigh) 表示构造第 i 位及其之后数位的合法方案数.
+
 limitLow：表示是否受到下界约束，若约束了，最小需要填start[i]，否则最小可以是0。
 
 ```py
@@ -57,3 +59,5 @@ limitLow：表示是否受到下界约束，若约束了，最小需要填start[
 
 ## [1397\. 找到所有好字符串](https://leetcode.cn/problems/find-all-good-strings/)
 数位DP + KMP
+
+## [233\. 数字 1 的个数](https://leetcode.cn/problems/number-of-digit-one/)

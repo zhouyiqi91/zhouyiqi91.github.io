@@ -97,9 +97,22 @@ class Solution1:
             sl.add(rx)
         return False
 
-
+# 桶排序思想
 class Solution:
     def containsNearbyAlmostDuplicate(self, nums: List[int], indexDiff: int, valueDiff: int) -> bool:
+        mp = defaultdict(lambda: inf)
+        l = 0
+        for r,rx in enumerate(nums):
+            if r-l>indexDiff:
+                i = nums[l] // (valueDiff + 1)
+                mp[i] = inf
+                l += 1
+            i = rx // (valueDiff + 1)
+            if mp[i] != inf or any(abs(rx - mp[i+j]) <= valueDiff for j in (-1,1)) :
+                return True
+            mp[i] = rx
+        return False
+
         
             
 # @lc code=end
