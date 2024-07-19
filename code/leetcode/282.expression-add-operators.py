@@ -128,8 +128,32 @@ class Solution2:
         dfs(0, True)
         return ans
 
+# pre最后一个连乘串的值，可以是单个数字
+# 对于i，枚举所有下一个切割数字的位置，比枚举是否加符号要方便
 class Solution:
     def addOperators(self, num: str, target: int) -> List[str]:
+        n = len(num)
+        ans = []
+
+        def dfs(i, cur, pre, ss):
+            if i==n:
+                if cur==target: ans.append(ss)
+                return
+            
+            d = 0
+            for j in range(i, n):
+                if j > i and num[i] == '0': #只允许单个0
+                    break
+                d = d * 10 + int(num[j])
+                if i==0:
+                    dfs(j+1,d,d,str(d))
+                else:
+                    dfs(j+1,cur+d,d,ss+'+'+str(d))
+                    dfs(j+1,cur-d,-d,ss+'-'+str(d))
+                    dfs(j+1,cur-pre+pre*d,pre*d,ss+'*'+str(d))
+            
+        dfs(0,0,0,"")
+        return ans
 
 # @lc code=end
 

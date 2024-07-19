@@ -74,6 +74,7 @@ from builtins import *
 from typing import *
 # @lcpr-template-end
 # @lc code=start
+# 动态规划 + 剪枝
 class Solution:
     def numDistinct(self, s: str, t: str) -> int:
         @cache
