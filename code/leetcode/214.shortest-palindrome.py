@@ -64,6 +64,7 @@ from typing import *
 # @lcpr-template-end
 # @lc code=start
 # 进制哈希 56ms，不加mod 2000+ms
+# 等价于求最长回文前缀
 class Solution1:
     def shortestPalindrome(self, s: str) -> str:
         base = 131
@@ -84,6 +85,7 @@ class Solution1:
 # KMP
 class Solution:
     def shortestPalindrome(self, s: str) -> str:
+        #TODO
         
 
 # @lc code=end
