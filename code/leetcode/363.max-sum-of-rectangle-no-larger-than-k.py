@@ -105,11 +105,34 @@ class Solution1:
                             ans = max(ans,cur)
         return ans
 
-# 有序集合 
+# 有序集合，固定三条边，枚举第四条边
+# sl.bisect
 
+from sortedcontainers import SortedList
 class Solution:
     def maxSumSubmatrix(self, matrix: List[List[int]], k: int) -> int:
+        m, n = len(matrix), len(matrix[0])
+        ans = -inf
+        for x1 in range(m):
+            s = [0] * n
+            for x2 in range(x1,m):
+                for y2 in range(n):
+                    s[y2] += matrix[x2][y2]
+
+                sl = SortedList([0])
+                ps = 0
+                for x in s:
+                    ps += x
+                    y1 = sl.bisect_left(ps-k) # bisect不行，默认是bisect_right
+                    if y1 < len(sl):
+                        ans = max(ans, ps - sl[y1])
+                        if ans == k: return k
+                    sl.add(ps)
+        return ans
+
+                
         
+
 # @lc code=end
 
 
