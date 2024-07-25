@@ -69,6 +69,8 @@ from builtins import *
 from typing import *
 # @lcpr-template-end
 # @lc code=start
+
+# 回溯
 class Solution:
     def totalNQueens(self, n: int) -> int:
         cols = [False] * n

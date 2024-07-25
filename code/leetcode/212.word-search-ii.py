@@ -75,13 +75,52 @@ from builtins import *
 from typing import *
 # @lcpr-template-end
 # @lc code=start
-class Node:
-      def __init__(self):
+         
+        
       
+# 思路 字典树 从字典树中及时移除已经发现的单词
 
+class Trie:
+    def __init__(self):
+        self.children = defaultdict(Trie)
+        self.word = ''
+
+    def add(self, word):
+        node = self
+        for c in word:
+            node = node.children[c]
+        node.word = word
 
 class Solution:
     def findWords(self, board: List[List[str]], words: List[str]) -> List[str]:
+        t = Trie()
+        for word in words:
+            t.add(word)
+        
+        DX = [0,0,1,-1]
+        DY = [-1,1,0,0]
+        m,n=len(board),len(board[0])
+        ans = []
+        def dfs(x,y,node):
+            c = board[x][y]
+            if not c in node.children: return
+            nxt = node.children[c]
+            board[x][y] = '#'
+            if nxt.word:
+                ans.append(nxt.word)
+                nxt.word = ""
+            for dx,dy in zip(DX,DY):
+                nx,ny = x+dx,y+dy
+                if 0<=nx<m and 0<=ny<n:
+                    dfs(nx,ny,nxt)
+            board[x][y] = c
+            if not nxt.children:
+                del node.children[c]
+
+        for x in range(m):
+            for y in range(n):
+                dfs(x,y,t)
+        return sorted(ans)
 # @lc code=end
 
 
