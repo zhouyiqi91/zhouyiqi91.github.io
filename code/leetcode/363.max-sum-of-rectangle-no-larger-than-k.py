@@ -105,7 +105,7 @@ class Solution1:
                             ans = max(ans,cur)
         return ans
 
-# 有序集合，固定三条边，枚举第四条边
+# 有序集合，固定三条边，枚举第四条边; 转化为在一维有序数组中查找左侧的边。
 # sl.bisect
 
 from sortedcontainers import SortedList
@@ -114,10 +114,10 @@ class Solution:
         m, n = len(matrix), len(matrix[0])
         ans = -inf
         for x1 in range(m):
-            s = [0] * n
+            s = [0] * n # 当前区域每一列的和
             for x2 in range(x1,m):
                 for y2 in range(n):
-                    s[y2] += matrix[x2][y2]
+                    s[y2] += matrix[x2][y2] 
 
                 sl = SortedList([0])
                 ps = 0
