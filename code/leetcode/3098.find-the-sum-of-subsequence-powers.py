@@ -7,11 +7,11 @@
 # https://leetcode.cn/problems/find-the-sum-of-subsequence-powers/description/
 #
 # algorithms
-# Hard (38.93%)
-# Likes:    12
+# Hard (39.01%)
+# Likes:    22
 # Dislikes: 0
-# Total Accepted:    2.5K
-# Total Submissions: 5.5K
+# Total Accepted:    3.8K
+# Total Submissions: 7.5K
 # Testcase Example:  '[1,2,3,4]\n3'
 #
 # 给你一个长度为 n 的整数数组 nums 和一个 正 整数 k 。
@@ -96,22 +96,27 @@ from builtins import *
 from typing import *
 # @lcpr-template-end
 # @lc code=start
+
+# 计数DP,选或者不选
+# 子序列，首先考虑排序
 class Solution:
     def sumOfPowers(self, nums: List[int], k: int) -> int:
-        
-
-
-# 如果是绝对值差最大
-# class Solution:
-#     def sumOfPowers(self, nums: List[int], k: int) -> int:
-#         nums.sort()
-#         ans = 0
-#         MOD = 10 ** 9+7
-#         n = len(nums)
-#         for l in range(n-k):
-#             for r in range(l+k-1,n):
-#                 ans += comb(r-l-1,k-2) * (nums[r] - nums)
+        nums.sort()
+        n = len(nums)
+        MOD = 10**9+7
+        @cache
+        def dp(i, last_val, min_diff, length):
+            if length == k: return min_diff
+            if i==n: return 0
+            res = 0
+            res += dp(i+1, nums[i], min(min_diff, nums[i]-last_val), length+1)
+            res += dp(i+1, last_val, min_diff, length)
+            return res % MOD
+        ans = dp(0, -inf, inf, 0)
+        dp.cache_clear()
+        return ans
 # @lc code=end
+
 
 
 #
