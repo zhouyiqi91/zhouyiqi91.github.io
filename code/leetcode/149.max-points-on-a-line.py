@@ -65,6 +65,9 @@ from builtins import *
 from typing import *
 # @lcpr-template-end
 # @lc code=start
+
+# 除法精度：使用分数元组表示
+# max的参数不能为空
 class Solution:
     def maxPoints(self, points: List[List[int]]) -> int:
 
