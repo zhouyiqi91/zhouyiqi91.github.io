@@ -97,6 +97,7 @@ class Solution1:
             sl.add(rx)
         return False
 
+
 # 桶排序思想
 class Solution:
     def containsNearbyAlmostDuplicate(self, nums: List[int], indexDiff: int, valueDiff: int) -> bool:
