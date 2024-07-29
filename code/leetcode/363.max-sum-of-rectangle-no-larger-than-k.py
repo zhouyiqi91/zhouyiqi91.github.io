@@ -123,7 +123,7 @@ class Solution:
                 ps = 0
                 for x in s:
                     ps += x
-                    y1 = sl.bisect_left(ps-k) # bisect不行，默认是bisect_right
+                    y1 = sl.bisect_left(ps-k) # 犯错 bisect不行，默认是bisect_right
                     if y1 < len(sl):
                         ans = max(ans, ps - sl[y1])
                         if ans == k: return k
