@@ -77,7 +77,11 @@ class Solution:
                 j = i + l - 1
                 if j > n-1: break
                 if dp(i,j):
+                    dp.cache_clear()
                     return s[i:j+1]
+                
+# Manacher 算法 马拉车 TODO
+
 # @lc code=end
 
 
