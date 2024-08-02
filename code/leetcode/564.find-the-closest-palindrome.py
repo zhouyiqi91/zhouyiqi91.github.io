@@ -68,8 +68,46 @@ from builtins import *
 from typing import *
 # @lcpr-template-end
 # @lc code=start
+class Solution_wrong:
+    def nearestPalindromic(self, n: str) -> str:
+        n = list(n)
+        length = len(n)
+        i = 0
+        j = length - 1
+        cnt = 0
+        while i < j:
+            if n[i] != n[j]:
+                n[j] = n[i]
+                cnt += 1
+            i += 1
+            j -= 1
+        if cnt == 0:
+            tmp = str(int(n[i]) - 1) if n[i] != '0' else '1'
+            if i==j:
+                n[i] = tmp
+            else:
+                n[i] = n[j] = tmp
+        return "".join(n)
+
+# adhoc 枚举前一半,+1,-1,以及进退位的100...001和99..99
 class Solution:
     def nearestPalindromic(self, n: str) -> str:
+        m = len(n)
+        cands = [pow(10,m)+1,pow(10,(m-1))-1]
+        pre = int(n[:(m+1)//2])
+        for x in range(pre-1,pre+2):
+            if m % 2 == 0:
+                cur = str(x) + str(x)[::-1]
+            else:
+                y = str(x)[:-1]
+                cur = y + str(x)[-1] + y[::-1]
+            cands.append(int(cur))
+
+        n = int(n)
+        #print(cands)
+        ans = min((abs(c-n),c) for c in cands if c != n)[1]
+        return str(ans)
+
 # @lc code=end
 
 
