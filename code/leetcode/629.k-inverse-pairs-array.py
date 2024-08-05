@@ -73,6 +73,7 @@ from typing import *
 # @lc code=start
 
 # 序列DP 前缀和优化 滚动数组
+# j是逆序对数目。对于第i个数插入的所有位置，新产生的逆序对是[0..i-1], 所以dp[j]可以从dp[j-(i-1)..j]转移而来
 class Solution:
     def kInversePairs(self, n: int, k: int) -> int:
         MOD = 10 ** 9 + 7
