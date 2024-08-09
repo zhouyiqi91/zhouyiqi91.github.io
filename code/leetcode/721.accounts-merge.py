@@ -101,6 +101,7 @@ class UF:
     def isConnected(self,x,y):
         return self.find(x) == self.find(y)
 
+# enumerate 简化写法
 class Solution:
     def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
         n = len(accounts)
