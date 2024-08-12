@@ -80,7 +80,7 @@ from typing import *
 
 # 官解： 对顶堆+延迟删除标记
 
-# 有序集合
+# 有序集合 + 删除
 from sortedcontainers import SortedList
 class Solution1:
     def medianSlidingWindow(self, nums: List[int], k: int) -> List[float]:
