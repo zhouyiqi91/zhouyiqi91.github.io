@@ -115,6 +115,7 @@ class Solution_wrong:
         return ans
     
 # 思路：最小堆依次更新内部节点
+# 类似于最短路思路
 class Solution:
     def trapRainWater(self, heightMap: List[List[int]]) -> int:
         m,n= len(heightMap), len(heightMap[0])

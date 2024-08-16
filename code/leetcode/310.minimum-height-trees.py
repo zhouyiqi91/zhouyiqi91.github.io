@@ -79,6 +79,8 @@ from builtins import *
 from typing import *
 # @lcpr-template-end
 # @lc code=start
+
+# 换根DP
 class Solution:
     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
         mh = defaultdict(list)
@@ -87,6 +89,7 @@ class Solution:
             g[x].append(y)
             g[y].append(x)
 
+        # mh记录前2个最长路径
         def dfs1(x, fa):
             cur = [-1,-1]
             for y in g[x]:
@@ -95,6 +98,7 @@ class Solution:
             cur.sort(reverse=True)
             mh[x] = cur[:2]
             return cur[0] + 1
+        
         h_node = defaultdict(list)
         h = dfs1(0,-1)
         h_node[h].append(0)
