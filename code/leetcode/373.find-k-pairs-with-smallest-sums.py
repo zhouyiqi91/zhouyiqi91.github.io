@@ -75,7 +75,7 @@ from typing import *
 # @lcpr-template-end
 # @lc code=start
 
-# war story 4.4 War Story: Give me a Ticket on an Airplane
+# war story 4.4 : Give me a Ticket on an Airplane
 # x+1,y 和 x,y+1不会在x,y之前出队
 # 优先队列 + hash避免重复添加
 class Solution1:
