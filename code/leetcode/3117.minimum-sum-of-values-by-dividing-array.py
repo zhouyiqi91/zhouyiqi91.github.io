@@ -144,18 +144,19 @@ class Solution_tle:
 # 选或不选，根据位运算性质，由于s只能从起点开始不断减少1个个数，只有logU个选择，所以复杂度m*n*logU
 class Solution:
     def minimumValueSum(self, nums: List[int], andValues: List[int]) -> int:
-        m,n = len(nums), len(andValues)
+        m,n=len(nums), len(andValues)
+        # nums匹配到i,addValues匹配到j，已有的AND值为x时，剩下元素的最小子数组和
         @cache
-        def dp(i, j, s):
-            if i==m:
-                return 0 if j==n else inf
+        def dp(i,j,x):
+            if i==m: return 0 if j==n else inf
             if j==n: return inf
-            s = s & nums[i]
-            res = dp(i+1, j, s)
-            if s == andValues[j]:
-                res = min(res, dp(i+1, j+1, -1) + nums[i])
-            return res
-
+            x &= nums[i]
+            if x < andValues[j]: return inf
+            res = dp(i+1, j, x)
+            if x == andValues[j]:
+                res = min(res, dp(i+1,j+1,-1) + nums[i])
+            return res 
+        
         ans = dp(0,0,-1)
         return ans if ans != inf else -1
 # @lc code=end

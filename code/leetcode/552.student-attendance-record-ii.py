@@ -102,6 +102,42 @@ class Solution1:
         ans = dp(0, 0, 0)
         dp.cache_clear()
         return ans
+
+# dp写在外面，共用缓存
+# dp(i,j,k) 在右边填了j个A,有连续k个L的情况下，能构造出长度为i的方案数
+mod = 10**9+7
+@cache
+def dp(i, a, l):
+    if i==0: return 1
+    res = dp(i-1, a, 0)
+    if a == 0: res += dp(i-1, 1, 0)
+    if l < 2: res += dp(i-1,a, l+1)
+    return res % mod
+
+class Solution2:
+    def checkRecord(self, n: int) -> int:
+        return dp(n, 0, 0)
+    
+# 递推
+mod = 10**9+7
+MX = 10**5 + 1
+
+f = [[[0]*3 for _ in range(2)] for _ in range(MX)]
+f[0][0] = [1]*3 
+f[0][1] = [1]*3
+for i in range(1, MX):
+    for j in range(2):
+        for k in range(3):
+            res = f[i-1][j][0]
+            if j==0: res += f[i-1][1][0]
+            if k<2: res += f[i-1][j][k+1]
+            f[i][j][k] = res % mod
+
+class Solution3:
+    def checkRecord(self, n: int) -> int:
+        return f[n][0][0]
+    
+
     
 # 矩阵快速幂优化dp
 class Solution:
@@ -138,6 +174,30 @@ class Solution:
         res = matrixPow(mat, n)
         ans = sum(res[0])
         return ans % MOD
+
+
+mod = 10**9+7
+
+def multiply(a, b):
+    c = []
+    for row in a:
+        cur = []
+        for col in zip(*b):
+            cur.append(sum(x*y for x,y in zip(row,col)) % mod)
+        c.append(cur)
+    return c
+
+# 返回 n 个矩阵 a 相乘的结果
+def pow(a, n):
+    size = len(a)
+    res = [[0]*size for _ in range(size)]
+    for i in range(size):
+        res[i][i] = 1
+    for i in range(n.bit_length()):
+        if (n >> i) & 1:
+            res = multiply(res, a)
+        a = multiply(a,a)
+    return res
     
 # numpy
 # mat = np.matrix(mat, dtype='object')
