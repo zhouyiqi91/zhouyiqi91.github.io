@@ -1,3 +1,5 @@
+# 模版.md template
+
 from string import *
 from re import *
 from datetime import *
@@ -85,11 +87,12 @@ def astar(start, target):
     return dis[target]
 
 # 并查集
+
 class UF:
     def __init__(self,n):
         self.pa = list(range(n))
         self.size = [1] * n
-        self.cnt = n #连通分量数目
+        self.cnt = n #连通分量数目，如果下标从1开始，改为n-1
 
     def find(self,x):
         if self.pa[x] != x:
@@ -110,3 +113,26 @@ class UF:
 
     def size(self, x):
         return self.size[self.find(x)]
+    
+
+# 二分查找 
+# https://github.com/python/cpython/blob/main/Lib/bisect.py
+# bisect_left >=的第一个
+def bisect_left(a, x, lo=0, hi=None):
+    if hi is None:
+        hi = len(a)
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if a[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid
+
+# >的第一个
+def bisect_right(a, x, lo=0, hi=None):
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if x < a[mid]:
+            hi = mid
+        else:
+            lo = mid + 1

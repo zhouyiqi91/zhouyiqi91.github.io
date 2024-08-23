@@ -118,10 +118,20 @@ class Solution:
                     res = 6 * dp(i+1, 0)
             else:
                 x = int(x)
-                if x in (1,2):
-                    res = dp(i+1, 0) + dp(i+1, x)
-                else:
+                if pre == 1:
                     res = dp(i+1, 0)
+                elif pre == 2:
+                    if x > 6:
+                        res = 0
+                    else:
+                        res = dp(i+1, 0)
+                elif pre==0:
+                    if x in (1,2):
+                        res = dp(i+1, 0) + dp(i+1, x)
+                    elif x==0:
+                        res = 0
+                    else:
+                        res = dp(i+1, 0)
             return res % mod
         
         return dp(0, 0)
